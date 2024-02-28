@@ -3,6 +3,7 @@ require("dotenv").config() ;
 
 //importing dependencies 
 const express = require("express")
+const cors = require("cors")
 require("./config/databaseDB")
 const notesController = require("./controllers/notesController")
 
@@ -11,6 +12,7 @@ const app = express() ;
 
 //configure express app to read json
 app.use(express.json()) ; 
+app.use(cors()) ;
 
 //Routing
 
