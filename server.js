@@ -4,8 +4,7 @@ require("dotenv").config() ;
 //importing dependencies 
 const express = require("express")
 require("./config/databaseDB")
-const Note = require('./models/note')
-
+const notesController = require("./controllers/notesController")
 
 //create an express app 
 const app = express() ; 
@@ -14,25 +13,21 @@ const app = express() ;
 app.use(express.json()) ; 
 
 //Routing
-app.get("/", (req, res) => {
-    res.json({ hello: "world"})
-}) ; 
 
-app.post('/notes', async (req, res) => {
-    //Get the sent in data off request body
-    const title = req.body.title; 
-    const body = req.body.body;
+//fetch all notes 
+app.get('/notes', notesController.fetchNotes )
 
-    //Create a note with it
-    const note = await Note.create({
-       title: title,
-       body: body, 
-    })
+//fetching single note 
+app.get('/notes/:id', notesController.fetchNote )
 
-    //respond with the new note 
-    res.json({note:note})
+//Creating a note 
+app.post('/notes', notesController.createNote )
 
-})
+//Update note
+app.put('/notes/:id', notesController.updateNote )
+
+//Delete note
+app.delete('/notes/:id', notesController.deleteNote )
 
 //Start our server
 const port = process.env.PORT || 3001;
