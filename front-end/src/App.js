@@ -15,7 +15,7 @@ useEffect(() => {
 const fetchNotes = async () => {
   //Fetch the notes
   try {
-    const res = await axios.get('http://localhost:3000/notes')
+    const res = await axios.get('http://localhost:3001/notes')
     setNotes(res.data.notes)
   } catch (error) {
     console.log(error)
@@ -27,15 +27,35 @@ const fetchNotes = async () => {
 const updateCreateFormField = (event) => {
   const {name, value} = event.target ; 
   setCreateForm({
-    ...setCreateForm,
+    ...createForm, 
     [name]: value, 
-  });
-  console.log({name, value}) ; 
+  }); 
 }
 
-const createNote = (event) => {
+console.log(createForm.title, createForm.body)
+
+const createNote = async (event) => {
    event.preventDefault(); 
-   console.log("submit")
+   //create the note
+   try {
+      const res = await axios.post("http://localhost:3001/notes", createForm) ;
+   
+   //Update the state
+   //setNotes([...notes, res.data.note]); 
+   setNotes([...notes, res.data.note]);
+  
+   //clear form state
+   setCreateForm({ title: "", body: ""})
+   } catch(error) {
+    console.error("Error creating note:", error)
+   }
+};
+
+const deleteNote = (_id) => {
+  //delete the note
+  const res = axios.delete(`http://localhost:3001/notes/${_id}`)
+  console.log(res) ; 
+  //update the state
 }
 
   return (
@@ -44,9 +64,14 @@ const createNote = (event) => {
         <h2>Notes:</h2>
          {notes &&
           notes.map((note) => {
+            
             return (
               <div key = {note._id}>
                 <h3> {note.title} </h3>
+                <p>{note.body}</p>
+                <button onClick={ () => deleteNote(note._id)}>
+                  Delete Note
+                </button>
               </div>
             ) ; 
           })}
