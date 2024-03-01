@@ -58,7 +58,7 @@ const deleteNote = async (_id) => {
   const newNotes = [...notes].filter((note) => {
     return note._id !== _id ; 
   })
-  setNotes(newNotes)
+  setNotes(newNotes) ; 
 }
 
   return (
