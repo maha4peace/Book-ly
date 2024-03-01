@@ -101,22 +101,22 @@ const toggleUpdate = (note) => {
           })}
 
       </div>
-      <div>
+      { updateForm._id && (<div>
         <h2> Update Note</h2>
         <form>
           <input onChange={handleUpdateFieldChange} value={updateForm.title} name="title" />
           <textarea onChange={handleUpdateFieldChange} value={updateForm.body} name="body"/>
           <button type="submit">Update Note</button> 
         </form>
-      </div>
-      <div>
+      </div>)}
+      { !updateForm._id && (<div>
         <h2> Create Note</h2>
         <form onSubmit={createNote}>
           <input onChange={updateCreateFormField} value={createForm.title} name="title"/>
           <textarea onChange={updateCreateFormField} value={createForm.body} name="body" />
           <button type="submit">Create Note</button>
         </form>
-      </div>
+      </div>)}
     </div>
 
   
