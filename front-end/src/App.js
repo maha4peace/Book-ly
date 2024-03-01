@@ -56,7 +56,11 @@ const deleteNote = async (_id) => {
   console.log(res) ; 
   //update the state
   const newNotes = [...notes].filter((note) => {
+<<<<<<< HEAD
     return note._id !== _id ; 
+=======
+    return note._id !== _id ;
+>>>>>>> 9e71154212e7eaa994e575b6dc5caa1011c561a5
   })
   setNotes(newNotes) ; 
 }
