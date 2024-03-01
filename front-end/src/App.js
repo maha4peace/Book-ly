@@ -54,8 +54,12 @@ const createNote = async (event) => {
 const deleteNote = (_id) => {
   //delete the note
   const res = axios.delete(`http://localhost:3001/notes/${_id}`)
-  console.log(res) ; 
+  console.log(res) 
   //update the state
+  const newNotes = [...notes].filter((note) => {
+    return note._id !== _id ; 
+  })
+  setNotes(newNotes)
 }
 
   return (
