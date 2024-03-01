@@ -7,6 +7,12 @@ const [createForm, setCreateForm] = useState({
   title: "",
   body: ""
 })
+const [updateForm, setUpdateForm] = useState({
+  _id: null,
+  title: "",
+  body: "",
+
+}) ;
 
 useEffect(() => {
   fetchNotes() ;
@@ -56,13 +62,22 @@ const deleteNote = async (_id) => {
   console.log(res) ; 
   //update the state
   const newNotes = [...notes].filter((note) => {
-<<<<<<< HEAD
-    return note._id !== _id ; 
-=======
     return note._id !== _id ;
->>>>>>> 9e71154212e7eaa994e575b6dc5caa1011c561a5
   })
   setNotes(newNotes) ; 
+}
+
+const handleUpdateFieldChange = async (event) => {
+  const {value, name} = event.target
+  setUpdateForm({
+    ...updateForm,
+    [name]: value, 
+  })
+}
+
+const toggleUpdate = (note) => {
+  //set state on updateForm 
+  setUpdateForm({title:note.title, body:note.body, _id: note._id })
 }
 
   return (
@@ -79,10 +94,20 @@ const deleteNote = async (_id) => {
                 <button onClick={ () => deleteNote(note._id)}>
                   Delete Note
                 </button>
+                <button onClick={ () => toggleUpdate(note)} >Update Note</button> 
+            
               </div>
             ) ; 
           })}
 
+      </div>
+      <div>
+        <h2> Update Note</h2>
+        <form>
+          <input onChange={handleUpdateFieldChange} value={updateForm.title} name="title" />
+          <textarea onChange={handleUpdateFieldChange} value={updateForm.body} name="body"/>
+          <button type="submit">Update Note</button> 
+        </form>
       </div>
       <div>
         <h2> Create Note</h2>
