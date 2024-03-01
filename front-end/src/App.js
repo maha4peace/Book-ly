@@ -95,7 +95,7 @@ console.log(res)
 
   return (
     <div className="App">
-      <div>
+      <div className="notes">
         <h2>Notes</h2>
          {notes &&
           notes.map((note) => {
@@ -117,16 +117,16 @@ console.log(res)
       { updateForm._id && (<div>
         <h2> Update Note</h2>
         <form onSubmit={updateNote}>
-          <input onChange={handleUpdateFieldChange} value={updateForm.title} name="title" />
-          <textarea onChange={handleUpdateFieldChange} value={updateForm.body} name="body"/>
-          <button type="submit">Update Note</button> 
+            <input style={{ display: 'flex', marginBottom: '10px', justifyContent: 'center' }} onChange={handleUpdateFieldChange} value={updateForm.title} name="title" />
+            <textarea style={{ display: 'flex', marginBottom: '10px', justifyContent: 'center' }} onChange={handleUpdateFieldChange} value={updateForm.body} name="body"/>
+            <button type="submit">Update Note</button> 
         </form>
       </div>)}
       { !updateForm._id && (<div>
-        <h2> Create Note</h2>
-        <form onSubmit={createNote}>
-          <input onChange={updateCreateFormField} value={createForm.title} name="title"/>
-          <textarea onChange={updateCreateFormField} value={createForm.body} name="body" />
+        
+        <form onSubmit={createNote} style={{ display: 'flex', marginBottom: '10px', justifyContent:'center', flexDirection: "column", alignItems: "center", color: "blue"}}>
+          <input  onChange={updateCreateFormField} value={createForm.title} name="title"/>
+          <textarea  onChange={updateCreateFormField} value={createForm.body} name="body" />
           <button type="submit">Create Note</button>
         </form>
       </div>)}

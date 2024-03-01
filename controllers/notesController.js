@@ -29,7 +29,7 @@ const createNote = async (req, res) => {
        title: title,
        body: body, 
     })
-
+    
     //respond with the new note 
     res.json({note:note})
 
@@ -59,6 +59,8 @@ const deleteNote = async (req, res) => {
     //get ID off url
     const noteId = req.params.id ;
     //delete the record
+    //await Note.deleteOne({ id: noteId})
+    
     await Note.findById(noteId)
     await Note.deleteOne()
     //respond
