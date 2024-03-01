@@ -80,6 +80,18 @@ const toggleUpdate = (note) => {
   setUpdateForm({title:note.title, body:note.body, _id: note._id })
 }
 
+const updateNote = async (e) => {
+  e.preventDefault() ; 
+  const {title, body} = updateForm; 
+   //send the update
+  const res = await axios.put(`http://localhost:3000/notes/${updateForm._id}`, {title, body})
+console.log(res)
+   //clear the state
+  
+}
+
+
+
   return (
     <div className="App">
       <div>
@@ -103,7 +115,7 @@ const toggleUpdate = (note) => {
       </div>
       { updateForm._id && (<div>
         <h2> Update Note</h2>
-        <form>
+        <form onSubmit={updateNote}>
           <input onChange={handleUpdateFieldChange} value={updateForm.title} name="title" />
           <textarea onChange={handleUpdateFieldChange} value={updateForm.body} name="body"/>
           <button type="submit">Update Note</button> 
