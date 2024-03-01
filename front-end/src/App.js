@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from 'axios' ; 
+import "./App.css"
 
 function App() {
 const [notes, setNotes] = useState(null) ;
@@ -87,15 +88,15 @@ const updateNote = async (e) => {
   const res = await axios.put(`http://localhost:3000/notes/${updateForm._id}`, {title, body})
 console.log(res)
    //clear the state
-  
+ 
+ //Update the state
+
 }
-
-
 
   return (
     <div className="App">
       <div>
-        <h2>Notes:</h2>
+        <h2>Notes</h2>
          {notes &&
           notes.map((note) => {
             
