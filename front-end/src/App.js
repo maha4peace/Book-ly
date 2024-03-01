@@ -41,7 +41,6 @@ const createNote = async (event) => {
       const res = await axios.post("http://localhost:3001/notes", createForm) ;
    
    //Update the state
-   //setNotes([...notes, res.data.note]); 
    setNotes([...notes, res.data.note]);
   
    //clear form state
@@ -51,10 +50,10 @@ const createNote = async (event) => {
    }
 };
 
-const deleteNote = (_id) => {
+const deleteNote = async (_id) => {
   //delete the note
-  const res = axios.delete(`http://localhost:3001/notes/${_id}`)
-  console.log(res) 
+  const res = await axios.delete(`http://localhost:3001/notes/${_id}`)
+  console.log(res) ; 
   //update the state
   const newNotes = [...notes].filter((note) => {
     return note._id !== _id ; 
